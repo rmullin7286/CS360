@@ -26,7 +26,8 @@ int main(int argc, char *argv[], char *env[])
 		myprintf("argv[%d]=%s\n",i,argv[i]);
 
 	//part 3. use myprintf to print values of env
-	//TODO
+	for(int i = 0; env[i] != 0; i++)
+		myprintf("env[%d]=%s\n", i, env[i]);
 
 	a=1; b=2; c=3;
 	A(a,b);
@@ -115,7 +116,7 @@ void rpu(u32 x, int base)
 	if(x)
 	{
 		c = ctable[x % base];
-		rpu(x / base);
+		rpu(x / base, base);
 		putchar(c);
 	}
 }
@@ -136,14 +137,25 @@ void printd(int x)
 		putchar('-');
 		x = -x;
 	}
-	printu_base(x, '\0', 10);
+	printu_base(x, "", 10);
 }
 
 //I decided to make all the functions macros so I didn't have to
 //write as much
-#define printu(x) printu(x, "\0", 10)
-#define printx(x) printu(x, "0x", 16)
-#define printo(x) printu(x, "0", 8)
+void printu(u32 x)
+{
+	printu_base(x, "", 10);
+}
+
+void printx(u32 x)
+{
+	printu_base(x, "0x", 16);
+}
+
+void printo(u32 x)
+{
+	printu_base(x, "0", 8);
+}
 
 //3. Write your own myprintf function
 void myprintf(char *fmt, ...)
@@ -157,13 +169,13 @@ void myprintf(char *fmt, ...)
 			fmt++;
 			switch(*fmt)
 			{
-				case 'c': putchar(va_arg(args, char));
+				case 'c': putchar(va_arg(args, int));
 					break;
 				case 's': prints(va_arg(args, char *));
 					break;
 				case 'u': printu(va_arg(args, u32));
 					break;
-				case 'd': printu(va_arg(args, int));
+				case 'd': printd(va_arg(args, int));
 					break;
 				case 'o': printo(va_arg(args, u32));
 					break;
@@ -184,7 +196,6 @@ void myprintf(char *fmt, ...)
 			putchar(*fmt);
 		}
 		
-		fmt++;
 	}
 	va_end(args);
 }
