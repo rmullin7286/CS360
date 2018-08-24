@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**************************** PART 1 ***********************************/
 int getebp(void);
 int A(int, int);
 int B(int, int);
@@ -83,4 +84,72 @@ int C(int x, int y)
 
     //(4). On a hard copy of the print out, identify the stack contents
     //as LOCAL VARIABLES, PARAMETERS, stack frame pointer of each function.
+}
+
+
+/******************************** PART 2 *********************************/
+
+//2-1. Write YOUR own prints(char* s) function to print a string
+void prints(char * s)
+{
+	while(*s != '\0')
+	{
+		putchar(*s);
+		s++;
+	}
+}
+
+typedef unsigned int u32;
+
+
+void rpu(u32 x, int base)
+{
+	static const char * ctable = "0123456789DEF";
+	char c;
+	if(x)
+	{
+		c = ctable[x % base];
+		rpu(x / base);
+		putchar(c);
+	}
+}
+
+void printu(u32 x)
+{
+	(x == 0) ? putchar('0') : rpu(x, 10);
+	putchar(' ');
+}
+
+//2-2. Write YOUR OWN functions
+
+void printd(int x)
+{
+	if(x < 0)
+	{
+		putchar('-');
+		rpu(-x, 10);
+	}
+	else if(x == 0)
+	{
+		putchar('0');
+	}
+	else
+	{
+		rpu(x, 10);
+	}
+	putchar(x);
+}
+
+void printx(u3x x)
+{
+	prints("0x");
+	(x == 0) ? putchar('0') : rpu(x, 16);
+	putchar(' ');
+}
+
+void printo(u32 x)
+{
+	putchar('0');
+	(x == 0) ? putchar('0') : rpu(x, 8);
+	putchar(' ');
 }
