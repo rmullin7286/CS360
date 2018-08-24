@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdarg.h>
+
+void myprintf(char*, ...);
 
 /**************************** PART 1 ***********************************/
 int getebp(void);
@@ -18,9 +21,12 @@ int main(int argc, char *argv[], char *env[])
 	printf("&a=%p &b=%p &c=%p\n", (void*)&a, (void*)&b, (void*)&c);
 
 	//(1). Write C code to print values of argc and argv[] entries
-	printf("argc=%d\n", argc);
+	myprintf("argc=%d\n", argc);
 	for(int i = 0; i < argc; i++)
-		printf("argv[%d]=%s\n",i,argv[i]);
+		myprintf("argv[%d]=%s\n",i,argv[i]);
+
+	//part 3. use myprintf to print values of env
+	//TODO
 
 	a=1; b=2; c=3;
 	A(a,b);
@@ -138,3 +144,47 @@ void printd(int x)
 #define printu(x) printu(x, "\0", 10)
 #define printx(x) printu(x, "0x", 16)
 #define printo(x) printu(x, "0", 8)
+
+//3. Write your own myprintf function
+void myprintf(char *fmt, ...)
+{
+	va_list args;
+	va_start(args, fmt);
+	for(; *fmt != '\0'; fmt++)
+	{
+		if(*fmt == '%')
+		{
+			fmt++;
+			switch(*fmt)
+			{
+				case 'c': putchar(va_arg(args, char));
+					break;
+				case 's': prints(va_arg(args, char *));
+					break;
+				case 'u': printu(va_arg(args, u32));
+					break;
+				case 'd': printu(va_arg(args, int));
+					break;
+				case 'o': printo(va_arg(args, u32));
+					break;
+				case 'x': printx(va_arg(args, u32));
+					break;
+				default:
+					return;
+			}
+		}
+
+		else if(*fmt == '\n')
+		{
+			prints("\r\n");
+		}
+
+		else
+		{
+			putchar(*fmt);
+		}
+		
+		fmt++;
+	}
+	va_end(args);
+}
