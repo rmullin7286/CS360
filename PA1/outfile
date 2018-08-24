@@ -1,0 +1,85 @@
+enter main
+&argc=0xff9ad390 argv=0xff9ad424 env=0xff9ad438
+&a=0xff9ad34c &b=0xff9ad350 &c=0xff9ad354
+argc=4
+argv[0]=./PA1
+argv[1]=one
+argv[2]=two
+argv[3]=three
+enter A
+&d=0xff9ad300 &e=0xff9ad304 &f=0xff9ad308
+enter B
+&g=0xff9ad2d0 &h=0xff9ad2d4 &i=0xff9ad2d8
+enter C
+&u=0xff9ad290 &v=0xff9ad294 &w=0xff9ad298 &i=0xff9ad29c &p=0xff9ad2a0
+
+STACK FRAME LINKED LIST
+0xff9ad2b8 ->0xff9ad2e8 ->0xff9ad318 ->0xff9ad378 ->0
+
+STACK CONTENTS
+0xff9ad2a0: ff9ad2a0
+0xff9ad2a4: 1
+0xff9ad2a8: ff9ad2a8
+0xff9ad2ac: c17be00
+0xff9ad2b0: ff9ad390
+0xff9ad2b4: 56586fd0
+STACK FRAME POINTER (C)
+0xff9ad2b8: ff9ad2e8
+0xff9ad2bc: 565857de
+PARAMETERS
+0xff9ad2c0: 7
+0xff9ad2c4: 8
+LOCAL VARIABLES
+0xff9ad2c8: ff9ad2d4
+0xff9ad2cc: ff9ad2d8
+0xff9ad2d0: 7
+0xff9ad2d4: 8
+0xff9ad2d8: 9
+0xff9ad2dc: c17be00
+0xff9ad2e0: ff9ad390
+0xff9ad2e4: 56586fd0
+STACK FRAME POINTER (B)
+0xff9ad2e8: ff9ad318
+0xff9ad2ec: 56585743
+PARAMETERS
+0xff9ad2f0: 4
+0xff9ad2f4: 5
+LOCAL VARIABLES
+0xff9ad2f8: ff9ad304
+0xff9ad2fc: ff9ad308
+0xff9ad300: 4
+0xff9ad304: 5
+0xff9ad308: 6
+0xff9ad30c: c17be00
+0xff9ad310: ff9ad390
+0xff9ad314: 56586fd0
+STACK FRAME POINTER (A)
+0xff9ad318: ff9ad378
+0xff9ad31c: 5658569e
+PARAMETERS
+0xff9ad320: 1
+0xff9ad324: 2
+LOCAL VARIABLES
+0xff9ad328: ff9ae3f6
+0xff9ad32c: ff9ad354
+0xff9ad330: 9
+0xff9ad334: ff9ae3e8
+0xff9ad338: ff9ad438
+0xff9ad33c: ff9ad424
+0xff9ad340: f7edb000
+0xff9ad344: f7edb000
+0xff9ad348: 0
+0xff9ad34c: 1
+0xff9ad350: 2
+0xff9ad354: 3
+0xff9ad358: 4
+0xff9ad35c: c17be00
+0xff9ad360: 4
+0xff9ad364: ff9ad424
+0xff9ad368: ff9ad438
+0xff9ad36c: ff9ad390
+0xff9ad370: 0
+0xff9ad374: f7edb000
+exit B
+exit A
+exit main
