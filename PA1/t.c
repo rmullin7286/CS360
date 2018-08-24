@@ -114,10 +114,11 @@ void rpu(u32 x, int base)
 	}
 }
 
-void printu(u32 x)
+//modified to make less code
+void printu_base(u32 x, char * prefix, int base)
 {
-	(x == 0) ? putchar('0') : rpu(x, 10);
-	putchar(' ');
+	prints(prefix);
+	(x == 0) ? putchar('0') : rpu(x, base);
 }
 
 //2-2. Write YOUR OWN functions
@@ -127,29 +128,13 @@ void printd(int x)
 	if(x < 0)
 	{
 		putchar('-');
-		rpu(-x, 10);
+		x = -x;
 	}
-	else if(x == 0)
-	{
-		putchar('0');
-	}
-	else
-	{
-		rpu(x, 10);
-	}
-	putchar(x);
+	printu_base(x, '\0', 10);
 }
 
-void printx(u3x x)
-{
-	prints("0x");
-	(x == 0) ? putchar('0') : rpu(x, 16);
-	putchar(' ');
-}
-
-void printo(u32 x)
-{
-	putchar('0');
-	(x == 0) ? putchar('0') : rpu(x, 8);
-	putchar(' ');
-}
+//I decided to make all the functions macros so I didn't have to
+//write as much
+#define printu(x) printu(x, "\0", 10)
+#define printx(x) printu(x, "0x", 16)
+#define printo(x) printu(x, "0", 8)
