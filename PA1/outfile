@@ -1,85 +1,131 @@
 enter main
-&argc=0xff9ad390 argv=0xff9ad424 env=0xff9ad438
-&a=0xff9ad34c &b=0xff9ad350 &c=0xff9ad354
+&argc=0xfff66680 argv=0xfff66724 env=0xfff66738
+&a=0xfff66664 &b=0xfff66660 &c=0xfff6665c
 argc=4
 argv[0]=./PA1
 argv[1]=one
 argv[2]=two
 argv[3]=three
+env[0]=MANPATH=:/var/cfengine/share/man
+env[1]=HOSTNAME=ssh2.eecs.wsu.edu
+env[2]=TERM=xterm-256color
+env[3]=SHELL=/bin/bash
+env[4]=HISTSIZE=1000
+env[5]=SSH_CLIENT=172.19.143.135 58436 22
+env[6]=QTDIR=/usr/lib64/qt-3.3
+env[7]=QTINC=/usr/lib64/qt-3.3/include
+env[8]=SSH_TTY=/dev/pts/0
+env[9]=USER=rmullin
+env[10]=LS_COLORS=rs=0:di=38;5;27:ln=38;5;51:mh=44;38;5;15:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=05;48;5;232;38;5;15:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;34:*.tar=38;5;9:*.tgz=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.Z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lz=38;5;9:*.xz=38;5;9:*.bz2=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.bz=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.rar=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.axv=38;5;13:*.anx=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.axa=38;5;45:*.oga=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:
+env[11]=MAIL=/var/spool/mail/rmullin
+env[12]=PATH=/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/var/cfengine/bin:/net/ugrads/rmullin/pvt/bin
+env[13]=PWD=/net/ugrads/rmullin/pvt/Documents/cs360/PA1
+env[14]=LANG=en_US.UTF-8
+env[15]=SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+env[16]=HISTCONTROL=ignoredups
+env[17]=KRB5CCNAME=FILE:/tmp/krb5cc_43169_i2dAsJ
+env[18]=SHLVL=1
+env[19]=HOME=/net/ugrads/rmullin/pvt
+env[20]=LOGNAME=rmullin
+env[21]=QTLIB=/usr/lib64/qt-3.3/lib
+env[22]=CVS_RSH=ssh
+env[23]=SSH_CONNECTION=172.19.143.135 58436 69.166.48.146 22
+env[24]=LESSOPEN=||/usr/bin/lesspipe.sh %s
+env[25]=G_BROKEN_FILENAMES=1
+env[26]=_=./PA1
+env[27]=OLDPWD=/net/ugrads/rmullin/pvt/Documents/cs360
 enter A
-&d=0xff9ad300 &e=0xff9ad304 &f=0xff9ad308
+&d=0xfff6662c &e=0xfff66628 &f=0xfff66624
 enter B
-&g=0xff9ad2d0 &h=0xff9ad2d4 &i=0xff9ad2d8
+&g=0xfff665fc &h=0xfff665f8 &i=0xfff665f4
 enter C
-&u=0xff9ad290 &v=0xff9ad294 &w=0xff9ad298 &i=0xff9ad29c &p=0xff9ad2a0
+&u=0xfff665c4 &v=0xfff665c0 &w=0xfff665bc &i=0xfff665b8 &p=0xfff665b4
 
 STACK FRAME LINKED LIST
-0xff9ad2b8 ->0xff9ad2e8 ->0xff9ad318 ->0xff9ad378 ->0
+0xfff665d8 ->0xfff66608 ->0xfff66638 ->0xfff66678 ->0xfff666f8 ->0
 
 STACK CONTENTS
-0xff9ad2a0: ff9ad2a0
-0xff9ad2a4: 1
-0xff9ad2a8: ff9ad2a8
-0xff9ad2ac: c17be00
-0xff9ad2b0: ff9ad390
-0xff9ad2b4: 56586fd0
-STACK FRAME POINTER (C)
-0xff9ad2b8: ff9ad2e8
-0xff9ad2bc: 565857de
-PARAMETERS
-0xff9ad2c0: 7
-0xff9ad2c4: 8
-LOCAL VARIABLES
-0xff9ad2c8: ff9ad2d4
-0xff9ad2cc: ff9ad2d8
-0xff9ad2d0: 7
-0xff9ad2d4: 8
-0xff9ad2d8: 9
-0xff9ad2dc: c17be00
-0xff9ad2e0: ff9ad390
-0xff9ad2e4: 56586fd0
-STACK FRAME POINTER (B)
-0xff9ad2e8: ff9ad318
-0xff9ad2ec: 56585743
-PARAMETERS
-0xff9ad2f0: 4
-0xff9ad2f4: 5
-LOCAL VARIABLES
-0xff9ad2f8: ff9ad304
-0xff9ad2fc: ff9ad308
-0xff9ad300: 4
-0xff9ad304: 5
-0xff9ad308: 6
-0xff9ad30c: c17be00
-0xff9ad310: ff9ad390
-0xff9ad314: 56586fd0
-STACK FRAME POINTER (A)
-0xff9ad318: ff9ad378
-0xff9ad31c: 5658569e
-PARAMETERS
-0xff9ad320: 1
-0xff9ad324: 2
-LOCAL VARIABLES
-0xff9ad328: ff9ae3f6
-0xff9ad32c: ff9ad354
-0xff9ad330: 9
-0xff9ad334: ff9ae3e8
-0xff9ad338: ff9ad438
-0xff9ad33c: ff9ad424
-0xff9ad340: f7edb000
-0xff9ad344: f7edb000
-0xff9ad348: 0
-0xff9ad34c: 1
-0xff9ad350: 2
-0xff9ad354: 3
-0xff9ad358: 4
-0xff9ad35c: c17be00
-0xff9ad360: 4
-0xff9ad364: ff9ad424
-0xff9ad368: ff9ad438
-0xff9ad36c: ff9ad390
-0xff9ad370: 0
-0xff9ad374: f7edb000
+0xfff665b4: fff665b4
+0xfff665b8: d
+0xfff665bc: c
+0xfff665c0: b
+0xfff665c4: a
+0xfff665c8: 5
+0xfff665cc: fff665cc
+0xfff665d0: fff665e4
+0xfff665d4: 6adff4
+0xfff665d8: fff66608
+0xfff665dc: 8048615
+0xfff665e0: 7
+0xfff665e4: 8
+0xfff665e8: fff665f8
+0xfff665ec: fff665f4
+0xfff665f0: 7
+0xfff665f4: 9
+0xfff665f8: 8
+0xfff665fc: 7
+0xfff66600: fff66614
+0xfff66604: 6adff4
+0xfff66608: fff66638
+0xfff6660c: 80485ac
+0xfff66610: 4
+0xfff66614: 5
+0xfff66618: fff66628
+0xfff6661c: fff66624
+0xfff66620: fff66678
+0xfff66624: 6
+0xfff66628: 5
+0xfff6662c: 4
+0xfff66630: fff66644
+0xfff66634: 6adff4
+0xfff66638: fff66678
+0xfff6663c: 804853e
+0xfff66640: 1
+0xfff66644: 2
+0xfff66648: fff68fc3
+0xfff6664c: fff6665c
+0xfff66650: 6ac1d8
+0xfff66654: 8048259
+0xfff66658: 6af160
+0xfff6665c: 3
+0xfff66660: 2
+0xfff66664: 1
+0xfff66668: 4
+0xfff6666c: 1c
+0xfff66670: 80489d0
+0xfff66674: 0
+0xfff66678: fff666f8
+0xfff6667c: 531d28
+0xfff66680: 4
+0xfff66684: fff66724
+0xfff66688: fff66738
+0xfff6668c: f77bf3d0
+0xfff66690: 8048370
+0xfff66694: ffffffff
+0xfff66698: 517fc4
+0xfff6669c: 8048259
+0xfff666a0: 1
+0xfff666a4: fff666e0
+0xfff666a8: 506e85
+0xfff666ac: 518ab8
+0xfff666b0: f77bf6b0
+0xfff666b4: 6adff4
+0xfff666b8: 0
+0xfff666bc: 0
+0xfff666c0: fff666f8
+0xfff666c4: 7db1d424
+0xfff666c8: 374503db
+0xfff666cc: 0
+0xfff666d0: 0
+0xfff666d4: 0
+0xfff666d8: 4
+0xfff666dc: 8048370
+0xfff666e0: 0
+0xfff666e4: 50d200
+0xfff666e8: 531c4b
+0xfff666ec: 517fc4
+0xfff666f0: 4
+0xfff666f4: 8048370
 exit B
 exit A
 exit main

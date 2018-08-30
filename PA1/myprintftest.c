@@ -7,5 +7,5 @@ int main(void)
 	int d = -50;
 	unsigned int u = 50;
 	
-	myprintf("c=%c, s=%s, d=%d, u=%u, o=%o, u=%u", c, s, d, u, d, d);
+	myprintf("c=%c, s=%s, d=%d, u=%u, o=%o, x=%x", c, s, d, u, u, u);
 }

@@ -1,3 +1,7 @@
+#include <stdarg.h>
+#include <stdio.h>
+#include "myprintf.h"
+
 //2-1. Write YOUR own prints(char* s) function to print a string
 void prints(char * s)
 {
