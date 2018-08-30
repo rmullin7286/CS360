@@ -114,9 +114,13 @@ PARAMETERS FOR A
 0xffd4feb0: 6ac1d8
 0xffd4feb4: 8048259
 0xffd4feb8: 6af160
+
+LOCAL VARIABLES FOR MAIN
 0xffd4febc: 3
 0xffd4fec0: 2
 0xffd4fec4: 1
+
+
 0xffd4fec8: 4
 0xffd4fecc: 1c
 0xffd4fed0: 80489c0
