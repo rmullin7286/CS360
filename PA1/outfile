@@ -45,42 +45,70 @@ STACK FRAME LINKED LIST
 0xffd4fe38 ->0xffd4fe68 ->0xffd4fe98 ->0xffd4fed8 ->0xffd4ff58 ->0
 
 STACK CONTENTS
+
+LOCAL VARIABLES FOR C
 0xffd4fe18: ffd4fe18
 0xffd4fe1c: d
 0xffd4fe20: c
 0xffd4fe24: b
 0xffd4fe28: a
+
+
 0xffd4fe2c: ffd4fe2c
 0xffd4fe30: ffd4fe44
 0xffd4fe34: 6adff4
+
+FUNCTION POINTER FOR C
 0xffd4fe38: ffd4fe68
+
 0xffd4fe3c: 8048615
+
+PARAMETERS FOR C
 0xffd4fe40: 7
 0xffd4fe44: 8
+
 0xffd4fe48: ffd4fe58
 0xffd4fe4c: ffd4fe54
 0xffd4fe50: 7
+
+LOCAL VARIABLES FOR B
 0xffd4fe54: 9
 0xffd4fe58: 8
 0xffd4fe5c: 7
+
 0xffd4fe60: ffd4fe74
 0xffd4fe64: 6adff4
+
+FUNCTION POINTER FOR B
 0xffd4fe68: ffd4fe98
+
 0xffd4fe6c: 80485ac
+
+PARAMETERS FOR B
 0xffd4fe70: 4
 0xffd4fe74: 5
+
 0xffd4fe78: ffd4fe88
 0xffd4fe7c: ffd4fe84
 0xffd4fe80: ffd4fed8
+
+LOCAL VARIABLES FOR A
 0xffd4fe84: 6
 0xffd4fe88: 5
 0xffd4fe8c: 4
+
 0xffd4fe90: ffd4fea4
 0xffd4fe94: 6adff4
+
+FUNCTION POINTER FOR A
 0xffd4fe98: ffd4fed8
+
 0xffd4fe9c: 804853e
+
+PARAMETERS FOR A
 0xffd4fea0: 1
 0xffd4fea4: 2
+
 0xffd4fea8: ffd50fea
 0xffd4feac: ffd4febc
 0xffd4feb0: 6ac1d8
@@ -93,11 +121,19 @@ STACK CONTENTS
 0xffd4fecc: 1c
 0xffd4fed0: 80489c0
 0xffd4fed4: 0
+
+FUNCTION POINTER FOR MAIN
 0xffd4fed8: ffd4ff58
+
 0xffd4fedc: 531d28
+
+PARAMETERS FOR MAIN
 0xffd4fee0: 4
 0xffd4fee4: ffd4ff84
 0xffd4fee8: ffd4ff98
+
+
+EXTRA FUNCTION CALL BEFORE MAIN??? (OLD VERSION OF GCC)
 0xffd4feec: f77963d0
 0xffd4fef0: 8048370
 0xffd4fef4: ffffffff
