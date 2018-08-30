@@ -1,6 +1,6 @@
 enter main
-&argc=0xfff66680 argv=0xfff66724 env=0xfff66738
-&a=0xfff66664 &b=0xfff66660 &c=0xfff6665c
+&argc=0xffd4fee0 argv=0xffd4ff84 env=0xffd4ff98
+&a=0xffd4fec4 &b=0xffd4fec0 &c=0xffd4febc
 argc=4
 argv[0]=./PA1
 argv[1]=one
@@ -11,121 +11,121 @@ env[1]=HOSTNAME=ssh2.eecs.wsu.edu
 env[2]=TERM=xterm-256color
 env[3]=SHELL=/bin/bash
 env[4]=HISTSIZE=1000
-env[5]=SSH_CLIENT=172.19.143.135 58436 22
+env[5]=SSH_CLIENT=172.19.143.135 58439 22
 env[6]=QTDIR=/usr/lib64/qt-3.3
-env[7]=QTINC=/usr/lib64/qt-3.3/include
-env[8]=SSH_TTY=/dev/pts/0
-env[9]=USER=rmullin
-env[10]=LS_COLORS=rs=0:di=38;5;27:ln=38;5;51:mh=44;38;5;15:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=05;48;5;232;38;5;15:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;34:*.tar=38;5;9:*.tgz=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.Z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lz=38;5;9:*.xz=38;5;9:*.bz2=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.bz=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.rar=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.axv=38;5;13:*.anx=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.axa=38;5;45:*.oga=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:
-env[11]=MAIL=/var/spool/mail/rmullin
-env[12]=PATH=/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/var/cfengine/bin:/net/ugrads/rmullin/pvt/bin
-env[13]=PWD=/net/ugrads/rmullin/pvt/Documents/cs360/PA1
-env[14]=LANG=en_US.UTF-8
-env[15]=SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
-env[16]=HISTCONTROL=ignoredups
-env[17]=KRB5CCNAME=FILE:/tmp/krb5cc_43169_i2dAsJ
-env[18]=SHLVL=1
-env[19]=HOME=/net/ugrads/rmullin/pvt
-env[20]=LOGNAME=rmullin
-env[21]=QTLIB=/usr/lib64/qt-3.3/lib
-env[22]=CVS_RSH=ssh
-env[23]=SSH_CONNECTION=172.19.143.135 58436 69.166.48.146 22
-env[24]=LESSOPEN=||/usr/bin/lesspipe.sh %s
-env[25]=G_BROKEN_FILENAMES=1
-env[26]=_=./PA1
-env[27]=OLDPWD=/net/ugrads/rmullin/pvt/Documents/cs360
+env[7]=OLDPWD=/net/ugrads/rmullin/pvt/Documents/cs360
+env[8]=QTINC=/usr/lib64/qt-3.3/include
+env[9]=SSH_TTY=/dev/pts/0
+env[10]=USER=rmullin
+env[11]=LS_COLORS=rs=0:di=38;5;27:ln=38;5;51:mh=44;38;5;15:pi=40;38;5;11:so=38;5;13:do=38;5;5:bd=48;5;232;38;5;11:cd=48;5;232;38;5;3:or=48;5;232;38;5;9:mi=05;48;5;232;38;5;15:su=48;5;196;38;5;15:sg=48;5;11;38;5;16:ca=48;5;196;38;5;226:tw=48;5;10;38;5;16:ow=48;5;10;38;5;21:st=48;5;21;38;5;15:ex=38;5;34:*.tar=38;5;9:*.tgz=38;5;9:*.arj=38;5;9:*.taz=38;5;9:*.lzh=38;5;9:*.lzma=38;5;9:*.tlz=38;5;9:*.txz=38;5;9:*.zip=38;5;9:*.z=38;5;9:*.Z=38;5;9:*.dz=38;5;9:*.gz=38;5;9:*.lz=38;5;9:*.xz=38;5;9:*.bz2=38;5;9:*.tbz=38;5;9:*.tbz2=38;5;9:*.bz=38;5;9:*.tz=38;5;9:*.deb=38;5;9:*.rpm=38;5;9:*.jar=38;5;9:*.rar=38;5;9:*.ace=38;5;9:*.zoo=38;5;9:*.cpio=38;5;9:*.7z=38;5;9:*.rz=38;5;9:*.jpg=38;5;13:*.jpeg=38;5;13:*.gif=38;5;13:*.bmp=38;5;13:*.pbm=38;5;13:*.pgm=38;5;13:*.ppm=38;5;13:*.tga=38;5;13:*.xbm=38;5;13:*.xpm=38;5;13:*.tif=38;5;13:*.tiff=38;5;13:*.png=38;5;13:*.svg=38;5;13:*.svgz=38;5;13:*.mng=38;5;13:*.pcx=38;5;13:*.mov=38;5;13:*.mpg=38;5;13:*.mpeg=38;5;13:*.m2v=38;5;13:*.mkv=38;5;13:*.ogm=38;5;13:*.mp4=38;5;13:*.m4v=38;5;13:*.mp4v=38;5;13:*.vob=38;5;13:*.qt=38;5;13:*.nuv=38;5;13:*.wmv=38;5;13:*.asf=38;5;13:*.rm=38;5;13:*.rmvb=38;5;13:*.flc=38;5;13:*.avi=38;5;13:*.fli=38;5;13:*.flv=38;5;13:*.gl=38;5;13:*.dl=38;5;13:*.xcf=38;5;13:*.xwd=38;5;13:*.yuv=38;5;13:*.cgm=38;5;13:*.emf=38;5;13:*.axv=38;5;13:*.anx=38;5;13:*.ogv=38;5;13:*.ogx=38;5;13:*.aac=38;5;45:*.au=38;5;45:*.flac=38;5;45:*.mid=38;5;45:*.midi=38;5;45:*.mka=38;5;45:*.mp3=38;5;45:*.mpc=38;5;45:*.ogg=38;5;45:*.ra=38;5;45:*.wav=38;5;45:*.axa=38;5;45:*.oga=38;5;45:*.spx=38;5;45:*.xspf=38;5;45:
+env[12]=MAIL=/var/spool/mail/rmullin
+env[13]=PATH=/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/var/cfengine/bin:/net/ugrads/rmullin/pvt/bin
+env[14]=PWD=/net/ugrads/rmullin/pvt/Documents/cs360/PA1
+env[15]=LANG=en_US.UTF-8
+env[16]=SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+env[17]=HISTCONTROL=ignoredups
+env[18]=KRB5CCNAME=FILE:/tmp/krb5cc_43169_U2Vidc
+env[19]=SHLVL=1
+env[20]=HOME=/net/ugrads/rmullin/pvt
+env[21]=LOGNAME=rmullin
+env[22]=QTLIB=/usr/lib64/qt-3.3/lib
+env[23]=CVS_RSH=ssh
+env[24]=SSH_CONNECTION=172.19.143.135 58439 69.166.48.146 22
+env[25]=LESSOPEN=||/usr/bin/lesspipe.sh %s
+env[26]=G_BROKEN_FILENAMES=1
+env[27]=_=./PA1
 enter A
-&d=0xfff6662c &e=0xfff66628 &f=0xfff66624
+&d=0xffd4fe8c &e=0xffd4fe88 &f=0xffd4fe84
 enter B
-&g=0xfff665fc &h=0xfff665f8 &i=0xfff665f4
+&g=0xffd4fe5c &h=0xffd4fe58 &i=0xffd4fe54
 enter C
-&u=0xfff665c4 &v=0xfff665c0 &w=0xfff665bc &i=0xfff665b8 &p=0xfff665b4
+&u=0xffd4fe28 &v=0xffd4fe24 &w=0xffd4fe20 &i=0xffd4fe1c &p=0xffd4fe18
 
 STACK FRAME LINKED LIST
-0xfff665d8 ->0xfff66608 ->0xfff66638 ->0xfff66678 ->0xfff666f8 ->0
+0xffd4fe38 ->0xffd4fe68 ->0xffd4fe98 ->0xffd4fed8 ->0xffd4ff58 ->0
 
 STACK CONTENTS
-0xfff665b4: fff665b4
-0xfff665b8: d
-0xfff665bc: c
-0xfff665c0: b
-0xfff665c4: a
-0xfff665c8: 5
-0xfff665cc: fff665cc
-0xfff665d0: fff665e4
-0xfff665d4: 6adff4
-0xfff665d8: fff66608
-0xfff665dc: 8048615
-0xfff665e0: 7
-0xfff665e4: 8
-0xfff665e8: fff665f8
-0xfff665ec: fff665f4
-0xfff665f0: 7
-0xfff665f4: 9
-0xfff665f8: 8
-0xfff665fc: 7
-0xfff66600: fff66614
-0xfff66604: 6adff4
-0xfff66608: fff66638
-0xfff6660c: 80485ac
-0xfff66610: 4
-0xfff66614: 5
-0xfff66618: fff66628
-0xfff6661c: fff66624
-0xfff66620: fff66678
-0xfff66624: 6
-0xfff66628: 5
-0xfff6662c: 4
-0xfff66630: fff66644
-0xfff66634: 6adff4
-0xfff66638: fff66678
-0xfff6663c: 804853e
-0xfff66640: 1
-0xfff66644: 2
-0xfff66648: fff68fc3
-0xfff6664c: fff6665c
-0xfff66650: 6ac1d8
-0xfff66654: 8048259
-0xfff66658: 6af160
-0xfff6665c: 3
-0xfff66660: 2
-0xfff66664: 1
-0xfff66668: 4
-0xfff6666c: 1c
-0xfff66670: 80489d0
-0xfff66674: 0
-0xfff66678: fff666f8
-0xfff6667c: 531d28
-0xfff66680: 4
-0xfff66684: fff66724
-0xfff66688: fff66738
-0xfff6668c: f77bf3d0
-0xfff66690: 8048370
-0xfff66694: ffffffff
-0xfff66698: 517fc4
-0xfff6669c: 8048259
-0xfff666a0: 1
-0xfff666a4: fff666e0
-0xfff666a8: 506e85
-0xfff666ac: 518ab8
-0xfff666b0: f77bf6b0
-0xfff666b4: 6adff4
-0xfff666b8: 0
-0xfff666bc: 0
-0xfff666c0: fff666f8
-0xfff666c4: 7db1d424
-0xfff666c8: 374503db
-0xfff666cc: 0
-0xfff666d0: 0
-0xfff666d4: 0
-0xfff666d8: 4
-0xfff666dc: 8048370
-0xfff666e0: 0
-0xfff666e4: 50d200
-0xfff666e8: 531c4b
-0xfff666ec: 517fc4
-0xfff666f0: 4
-0xfff666f4: 8048370
+0xffd4fe18: ffd4fe18
+0xffd4fe1c: d
+0xffd4fe20: c
+0xffd4fe24: b
+0xffd4fe28: a
+0xffd4fe2c: ffd4fe2c
+0xffd4fe30: ffd4fe44
+0xffd4fe34: 6adff4
+0xffd4fe38: ffd4fe68
+0xffd4fe3c: 8048615
+0xffd4fe40: 7
+0xffd4fe44: 8
+0xffd4fe48: ffd4fe58
+0xffd4fe4c: ffd4fe54
+0xffd4fe50: 7
+0xffd4fe54: 9
+0xffd4fe58: 8
+0xffd4fe5c: 7
+0xffd4fe60: ffd4fe74
+0xffd4fe64: 6adff4
+0xffd4fe68: ffd4fe98
+0xffd4fe6c: 80485ac
+0xffd4fe70: 4
+0xffd4fe74: 5
+0xffd4fe78: ffd4fe88
+0xffd4fe7c: ffd4fe84
+0xffd4fe80: ffd4fed8
+0xffd4fe84: 6
+0xffd4fe88: 5
+0xffd4fe8c: 4
+0xffd4fe90: ffd4fea4
+0xffd4fe94: 6adff4
+0xffd4fe98: ffd4fed8
+0xffd4fe9c: 804853e
+0xffd4fea0: 1
+0xffd4fea4: 2
+0xffd4fea8: ffd50fea
+0xffd4feac: ffd4febc
+0xffd4feb0: 6ac1d8
+0xffd4feb4: 8048259
+0xffd4feb8: 6af160
+0xffd4febc: 3
+0xffd4fec0: 2
+0xffd4fec4: 1
+0xffd4fec8: 4
+0xffd4fecc: 1c
+0xffd4fed0: 80489c0
+0xffd4fed4: 0
+0xffd4fed8: ffd4ff58
+0xffd4fedc: 531d28
+0xffd4fee0: 4
+0xffd4fee4: ffd4ff84
+0xffd4fee8: ffd4ff98
+0xffd4feec: f77963d0
+0xffd4fef0: 8048370
+0xffd4fef4: ffffffff
+0xffd4fef8: 517fc4
+0xffd4fefc: 8048259
+0xffd4ff00: 1
+0xffd4ff04: ffd4ff40
+0xffd4ff08: 506e85
+0xffd4ff0c: 518ab8
+0xffd4ff10: f77966b0
+0xffd4ff14: 6adff4
+0xffd4ff18: 0
+0xffd4ff1c: 0
+0xffd4ff20: ffd4ff58
+0xffd4ff24: fc8e09af
+0xffd4ff28: f34a1e50
+0xffd4ff2c: 0
+0xffd4ff30: 0
+0xffd4ff34: 0
+0xffd4ff38: 4
+0xffd4ff3c: 8048370
+0xffd4ff40: 0
+0xffd4ff44: 50d200
+0xffd4ff48: 531c4b
+0xffd4ff4c: 517fc4
+0xffd4ff50: 4
+0xffd4ff54: 8048370
+0xffd4ff58: 0
 exit B
 exit A
 exit main

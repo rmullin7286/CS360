@@ -81,8 +81,7 @@ int C(int x, int y)
 	while(*FP != 0)
 		FP = (int *)*FP;
 	printf("\nSTACK CONTENTS\n");
-	int count = 0;
-	for(int * i = p; i < FP && count < 128; i++, count++)
+	for(int * i = p; i <= FP; i++)
 		printf("%p: %x\n", (void*)i, *i);
 		
 
