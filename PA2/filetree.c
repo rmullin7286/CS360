@@ -21,18 +21,20 @@ FileTree initFileTree(void)
 
 Node * searchPath(Node * start, char * path)
 {
-    char * tok = strtok(path, '/');
+    char * tok = strtok(path, "/");
     do
     {
         if(start->type == FILENODE)
             return NULL;
         start = start->child;
         while(start)
-            if(strcmp(start->name, tok))
+            if(strcmp(start->name, tok) == 0)
                 break;
+            else
+                start = start->sibling;
         if(!start)
             return NULL;
-    }while(tok = strtok(NULL, '/'));
+    }while(tok = strtok(NULL, "/"));
     return start;
 }
 
@@ -81,7 +83,7 @@ int insertNode(FileTree * ft, char * pathname, NodeType t)
     //check if absolute or relative
     Node * path;
     {
-        if(dirname[0] == '/')
+        if(dirname != NULL && dirname[0] == '/')
         {
             dirname = dirname + 1;
             path = ft->root;
@@ -94,12 +96,11 @@ int insertNode(FileTree * ft, char * pathname, NodeType t)
 
     //search
     {
-        if(!(path = searchPath(path, dirname)))
+        if(dirname != NULL && !(path = searchPath(path, dirname)))
         {
             printf("Invalid path");
             return -1;
         }
-
     }
 
     //add child
@@ -115,7 +116,7 @@ int insertNode(FileTree * ft, char * pathname, NodeType t)
             path = path->child;
             while(path->sibling != NULL)
                 path = path->sibling;
-            newNode = path->sibling;
+            path->sibling = newNode;
         }
         newNode->parent = path;
     }
@@ -130,7 +131,7 @@ int creat(FileTree * ft, char * pathname)
 
 int mkdir(FileTree * ft, char * pathname)
 {
-    return insertnode(ft, pathname, DIRECTORYNODE);
+    return insertNode(ft, pathname, DIRECTORYNODE);
 }
 
 int rmdir(FileTree * ft, char * pathname)
@@ -169,6 +170,7 @@ int rmdir(FileTree * ft, char * pathname)
     else
     {
         removeNode(path);
+        return 0;
     }
 }
 
@@ -185,7 +187,7 @@ int cd(FileTree * ft, char * pathname)
         path = ft->cwd;
     }
 
-    if(path = searchPath(path, pathname))
+    if(pathname[0] == '\0' || (path = searchPath(path, pathname)))
     {
         ft->cwd = path;
         return 0;
@@ -211,7 +213,7 @@ int ls(FileTree * ft, char * pathname)
         path = ft->cwd;
     }
 
-    if(path = searchPath(path, pathname))
+    if(pathname[0] == '\0' || (path = searchPath(path, pathname)))
     {
         path = path->child;
         while(path)
@@ -240,4 +242,84 @@ int pwdHelper(Node * path, Node * root)
 int pwd(FileTree * ft)
 {
     return pwdHelper(ft->cwd, ft->root); 
+}
+
+int rm(FileTree * ft, char * pathname)
+{
+    Node * path;
+    if(pathname[0] == '/')
+    {
+        pathname = pathname + 1;
+        path = ft->root;
+    }
+    else
+    {
+        path = ft->cwd;
+    }
+
+    if(!(path = searchPath(path, pathname)))
+    {
+        printf("Invalid path");
+        return -1;
+    }
+    else if(path->type != FILENODE)
+    {
+        printf("Path is not a file");
+        return -1;
+    }
+    else
+    {
+        removeNode(path);
+        return 0;
+    }
+}
+
+void saveHelper(Node * path, FILE * out, char * pathname)
+{
+    if(!path)
+        return;
+    fprintf(out, "%d %s%s\n", path->type, pathname, path->name);
+    char new_pathname[50];
+    strcpy(new_pathname, pathname);
+    strcat(new_pathname, path->name);
+    if(strcmp(path->name, "/") != 0)
+        strcat(new_pathname, "/");
+    saveHelper(path->child, out, new_pathname);
+    saveHelper(path->sibling, out, pathname);
+}
+
+void save(FileTree * ft)
+{
+    FILE * out = fopen("save.txt", "w+");
+    saveHelper(ft->root, out, "");
+    fclose(out);
+}
+
+void reload(FileTree * ft)
+{
+    FILE * in = fopen("save.txt", "r");
+    if(!in)
+        return;
+    char line[100];
+    char type[10], path[50];
+    while(fgets(line, 100, in))
+    {
+        sscanf("%s %s", type, path);
+        insertNode(ft, path, atoi(type));
+    }
+}
+
+void closeFileTreeHelper(Node * path)
+{
+    if(!path)
+        return;
+    Node * child = path->child, * sibling = path->sibling;
+    free(path);
+    closeFileTreeHelper(child);
+    closeFileTreeHelper(sibling);
+}
+
+void closeFileTree(FileTree * ft)
+{
+    closeFileTreeHelper(ft->root);
 }

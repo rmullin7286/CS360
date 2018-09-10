@@ -22,6 +22,7 @@ typedef struct filetree
 
 FileTree initFileTree(void);
 Node * makeNode(char * name, NodeType type);
+void closeFileTree(FileTree * ft);
 
 int mkdir(FileTree * ft, char * pathname);
 int rmdir(FileTree * ft, char * pathname);
@@ -29,6 +30,7 @@ int cd(FileTree * ft, char * pathname);
 int creat(FileTree * ft, char * pathname);
 int ls(FileTree * ft, char * pathname);
 int pwd(FileTree * ft);
+int rm(FileTree * ft, char * pathname);
 
 void save(FileTree * ft);
-FileTree reload(FileTree * ft);
+void reload(FileTree * ft);
