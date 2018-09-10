@@ -50,3 +50,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+#compiled binaries
+PA1
+PA2
+
+#misc files
+PA2/save.txt
