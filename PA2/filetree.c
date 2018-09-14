@@ -98,7 +98,7 @@ int insertNode(FileTree * ft, char * pathname, NodeType t)
     {
         if(dirname != NULL && !(path = searchPath(path, dirname)))
         {
-            printf("Invalid path");
+            printf("Invalid path\n");
             return -1;
         }
     }
@@ -151,19 +151,19 @@ int rmdir(FileTree * ft, char * pathname)
     //find dir
     if(!(path = searchPath(path, pathname)))
     {
-        printf("Invalid path");
+        printf("Invalid path\n");
         return -1;
     }
 
     else if(path->type != DIRECTORYNODE)
     {
-        printf("Path is not a directory");
+        printf("Path is not a directory\n");
         return -1;
     }
 
     else if(path->child)
     {
-        printf("Directory is not empty");
+        printf("Directory is not empty\n");
         return -1;
     }
 
@@ -194,7 +194,7 @@ int cd(FileTree * ft, char * pathname)
     }
     else
     {
-        printf("Invalid path");
+        printf("Invalid path\n");
         return -1;
     }
 
@@ -225,7 +225,7 @@ int ls(FileTree * ft, char * pathname)
     }
     else
     {
-        printf("Invalid path");
+        printf("Invalid path\n");
         return -1;
     }
 }
@@ -234,7 +234,6 @@ int pwdHelper(Node * path, Node * root)
 {
     if(path == root)
     {
-        printf("\n");
         return 0;
     }
     pwdHelper(path->parent, root);
@@ -249,7 +248,9 @@ int pwd(FileTree * ft)
         printf("/\n");
         return 0;
     }
-    return pwdHelper(ft->cwd, ft->root); 
+    int ret =  pwdHelper(ft->cwd, ft->root);
+    printf("\n");
+    return ret;
 }
 
 int rm(FileTree * ft, char * pathname)
@@ -267,12 +268,12 @@ int rm(FileTree * ft, char * pathname)
 
     if(!(path = searchPath(path, pathname)))
     {
-        printf("Invalid path");
+        printf("Invalid path\n");
         return -1;
     }
     else if(path->type != FILENODE)
     {
-        printf("Path is not a file");
+        printf("Path is not a file\n");
         return -1;
     }
     else
