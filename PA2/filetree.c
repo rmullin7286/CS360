@@ -297,15 +297,18 @@ void save(FileTree * ft)
 
 void reload(FileTree * ft)
 {
+    closeFileTree(ft);
+    *ft = initFileTree();
     FILE * in = fopen("save.txt", "r");
     if(!in)
         return;
     char line[100];
     char type[10], path[50];
+    fgets(line, 100, in);
     while(fgets(line, 100, in))
     {
-        sscanf("%s %s", type, path);
-        insertNode(ft, path, atoi(type));
+        sscanf(line, "%s %s", type, path);
+        insertNode(ft, path + 1, atoi(type));
     }
 }
 
