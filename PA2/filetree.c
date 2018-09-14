@@ -176,6 +176,11 @@ int rmdir(FileTree * ft, char * pathname)
 
 int cd(FileTree * ft, char * pathname)
 {
+    if(strcmp(pathname, "") == 0)
+    {
+        ft->cwd = ft->root;
+        return 0;
+    }
     Node* path;
     if(pathname[0] == '/')
     {
