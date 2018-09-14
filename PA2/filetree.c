@@ -233,7 +233,10 @@ int ls(FileTree * ft, char * pathname)
 int pwdHelper(Node * path, Node * root)
 {
     if(path == root)
+    {
+        printf("\n");
         return 0;
+    }
     pwdHelper(path->parent, root);
     printf("/%s", path->name);
     return 0;
@@ -241,6 +244,11 @@ int pwdHelper(Node * path, Node * root)
 
 int pwd(FileTree * ft)
 {
+    if(ft->cwd == ft->root)
+    {
+        printf("/\n");
+        return 0;
+    }
     return pwdHelper(ft->cwd, ft->root); 
 }
 

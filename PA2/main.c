@@ -6,31 +6,25 @@ char line[128];
 char command[16], pathname[64];
 char dname[64], bname[64];
 
+static const char * commands[] = {
+    "mkdir",
+    "rmdir",
+    "ls",
+    "cd",
+    "pwd",
+    "creat",
+    "rm",
+    "save",
+    "reload",
+    "menu",
+    "quit"	
+};
+
 int getCmd(char * cmd)
 {
-    if(strcmp(cmd, "mkdir") == 0)
-        return 0;
-    if(strcmp(cmd, "rmdir") == 0)
-        return 1;
-    if(strcmp(cmd, "ls") == 0)
-        return 2;
-    if(strcmp(cmd, "cd") == 0)
-        return 3;
-    if(strcmp(cmd, "pwd") == 0)
-        return 4;
-    if(strcmp(cmd, "creat") == 0)
-        return 5;
-    if(strcmp(cmd, "rm") == 0)
-        return 6;
-    if(strcmp(cmd, "save") == 0)
-        return 7;
-    if(strcmp(cmd, "reload") == 0)
-        return 8;
-    if(strcmp(cmd, "menu") == 0)
-        return 9;
-    if(strcmp(cmd, "quit") == 0)
-        return 10;
-    return -1;
+    int i;
+    for(i = 0; i < 11 && strcmp(cmd, commands[i]) != 0; i++);
+    return i == 11 ? -1 : i;
 }
 
 void menu(void)
