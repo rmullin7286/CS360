@@ -148,6 +148,7 @@ int main(int argc, char * argv[], char * env[])
 	{
 		printf("RyanOS>");
 		fgets(input, 1000, stdin);
+		input[strlen(input) - 1] = '\0';
 		//split into piped_commands terminated by NULL
 		piped_commands[0] = strtok(input, "|");
 		for(int i = 1; piped_commands[i] = strtok(NULL, "|"); i++);
