@@ -23,6 +23,21 @@ void cd(char * args[])
 	}
 }
 
+void searchPath(char * source, char * destination)
+{
+	char * path = getenv("PATH");
+	char * check = strtok(path, ";");
+	while(check)
+	{
+		strcpy(destination, check);
+		strcat(destination, "/");
+		strcat(destination, source);
+		if(access(destination, F_OK) != -1)
+			return;
+		check = strtok(NULL, ";");
+	}		
+}
+
 void runCommandsHelper(char* commands[], char * env[])
 {
 	char* head[20];
@@ -72,6 +87,7 @@ void runCommandsHelper(char* commands[], char * env[])
 	//base case. just run head
 	else if(tail[0] == NULL)
 	{
+		printf("%s %s", head[0], head[1]);
 		execve(head[0], head, env);
 	}
 	else
