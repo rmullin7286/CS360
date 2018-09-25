@@ -5,6 +5,24 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 
+void cd(char * args[])
+{
+	//if user has specified a path, cd to there.
+	//Otherwise, cd to HOME
+	if(args[1])
+	{
+		if(chdir(args[1]) == -1)
+			printf("Error: Could not change directory");
+	}
+	else
+	{
+		char home[100];
+		getcwd(home, 100);
+		if(chdir(home) == -1)
+			printf("Error: Could not change directory");
+	}
+}
+
 void runCommandsHelper(char* commands[], char * env[])
 {
 	char* head[20];
@@ -42,8 +60,17 @@ void runCommandsHelper(char* commands[], char * env[])
 	for(int i = 1; head[i] = strtok(NULL, " "); i++);
 	
 	char ** tail = commands + 1;
+	//handlers for "cd" and "exit"
+	if(strcmp(head[0], "cd") == 0)
+	{
+		cd(head);
+	}
+	else if(strcmp(head[0], "exit") == 0)
+	{
+		exit(1);
+	}
 	//base case. just run head
-	if(tail[0] == NULL)
+	else if(tail[0] == NULL)
 	{
 		execve(head[0], head, env);
 	}
