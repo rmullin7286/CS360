@@ -1,25 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-void runCommands(char *commands[], char * env[])
-{
-	int pid = fork();
-	if(pid < 0)
-	{
-		perror("Could not fork child. Exiting\n");
-		exit(1);
-	}
-	else if(pid)
-	{
-		int status;
-		pid = wait(status);
-	}
-	else
-	{
-		runCommandsHelper(commands);
-	}
-}
+#include <unistd.h>
 
 void runCommandsHelper(char* commands[], char * env[])
 {
@@ -88,8 +70,27 @@ void runCommandsHelper(char* commands[], char * env[])
 			close(0);
 			dup(pd[0]);
 			close(pd[0]);
-			runCommandsHelper(tail);
+			runCommandsHelper(tail, env);
 		}
+	}
+}
+
+void runCommands(char *commands[], char * env[])
+{
+	int pid = fork();
+	if(pid < 0)
+	{
+		perror("Could not fork child. Exiting\n");
+		exit(1);
+	}
+	else if(pid)
+	{
+		int status;
+		pid = wait(status);
+	}
+	else
+	{
+		runCommandsHelper(commands, env);
 	}
 }
 
