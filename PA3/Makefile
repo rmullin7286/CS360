@@ -1,2 +1,2 @@
 PA3: main.c
-	gcc main.c -o PA3
+	gcc -std=gnu99 main.c -o PA3
