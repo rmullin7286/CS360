@@ -5,6 +5,19 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 
+//utility function to see if a string starts with another string
+int startsWith(char * source, char * start)
+{
+	while(start)
+	{
+		if(*source != *start)
+			return 1;
+		source++;
+		start++;
+	}
+	return 0;
+}
+
 void cd(char * args[])
 {
 	//if user has specified a path, cd to there.
@@ -75,17 +88,8 @@ void runCommandsHelper(char* commands[], char * env[])
 	for(int i = 1; head[i] = strtok(NULL, " "); i++);
 	
 	char ** tail = commands + 1;
-	//handlers for "cd" and "exit"
-	if(strcmp(head[0], "cd") == 0)
-	{
-		cd(head);
-	}
-	else if(strcmp(head[0], "exit") == 0)
-	{
-		exit(1);
-	}
 	//base case. just run head
-	else if(tail[0] == NULL)
+	if(tail[0] == NULL)
 	{
 		printf("%s %s", head[0], head[1]);
 		execve(head[0], head, env);
@@ -122,20 +126,34 @@ void runCommandsHelper(char* commands[], char * env[])
 
 void runCommands(char *commands[], char * env[])
 {
-	int pid = fork();
-	if(pid < 0)
+	//handlers for cd and exit
+	if(startsWith(commands[0], "cd"))
 	{
-		perror("Could not fork child. Exiting\n");
-		exit(1);
+		char * path = strtok(commands[0], " ");
+		path = strtok(NULL, " ");
+		chdir(path);
 	}
-	else if(pid)
+	else if(startsWith(commands[0], "exit"))
 	{
-		int status;
-		pid = wait(&status);
+		exit(1);
 	}
 	else
 	{
-		runCommandsHelper(commands, env);
+		int pid = fork();
+		if(pid < 0)
+		{
+			perror("Could not fork child. Exiting\n");
+			exit(1);
+		}
+		else if(pid)
+		{
+			int status;
+			pid = wait(&status);
+		}
+		else
+		{
+			runCommandsHelper(commands, env);
+		}
 	}
 }
 
