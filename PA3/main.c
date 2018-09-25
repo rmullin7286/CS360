@@ -88,7 +88,7 @@ void runCommands(char *commands[], char * env[])
 	else if(pid)
 	{
 		int status;
-		pid = wait(status);
+		pid = wait(&status);
 	}
 	else
 	{
