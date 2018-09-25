@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/wait.h>
 
 void runCommandsHelper(char* commands[], char * env[])
 {
@@ -107,6 +108,6 @@ int main(int argc, char * argv[], char * env[])
 		//split into piped_commands terminated by NULL
 		piped_commands[0] = strtok(input, "|");
 		for(int i = 1; piped_commands[i] = strtok(NULL, "|"); i++);
-		runCommands(piped_commands);
+		runCommands(piped_commands, env);
 	}
 }
