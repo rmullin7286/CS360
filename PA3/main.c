@@ -5,9 +5,6 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 
-int stdin_copy = dup(0);
-int stdout_copy = dup(1);
-
 void searchPath(char * source, char * destination)
 {
 	char * path = getenv("PATH");
@@ -23,14 +20,15 @@ void searchPath(char * source, char * destination)
 	}		
 }
 
-void executeCommand(char * args[], char * env[])
-{
+void executeProcess(char * args[], char * env[])
+{	
 	int pid = fork();
+
 	if(pid)
 	{
 		int status;
-		pid = wait(&status);
-		fprintf(stderr, "Exit status of %s: %d", args[0], WEXITSTATUS(status));
+		wait(&status);
+		fprintf(stderr, "Exit status of %s: %d\n", args[0], WEXITSTATUS(status));
 	}
 	else
 	{
@@ -82,6 +80,7 @@ void runCommandsHelper(char* commands[], char * env[])
 	if(tail[0] == NULL)
 	{
 		executeProcess(head, env);
+		exit(1);
 	}
 	else
 	{
@@ -91,7 +90,6 @@ void runCommandsHelper(char* commands[], char * env[])
 		int pid = fork();
 		if(pid < 0)
 		{
-			perror("Could not fork child. Exiting.");
 			exit(1);
 		}
 		else if(pid)
@@ -101,6 +99,7 @@ void runCommandsHelper(char* commands[], char * env[])
 			dup(pd[1]);
 			close(pd[1]);
 			executeProcess(head, env);
+			exit(1);
 		}
 		else
 		{
@@ -142,6 +141,7 @@ void runCommands(char *commands[], char * env[])
 		{
 			int status;
 			pid = wait(&status);
+			usleep(1000);
 		}
 		else
 		{
@@ -156,7 +156,7 @@ int main(int argc, char * argv[], char * env[])
 	char input[1000];
 	char *piped_commands[50] = {NULL};
 	system("clear");
-	printf("Welcome to RyanOS!\n\n");
+	fprintf(stderr, "Welcome to RyanOS!\n\n");
 	while(1)
 	{
 		printf("RyanOS>");
