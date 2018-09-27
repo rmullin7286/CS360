@@ -5,41 +5,10 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 
-//utility function to see if a string starts with another string
-int startsWith(char * source, char * start)
-{
-	while(start)
-	{
-		if(*source != *start)
-			return 0;
-		source++;
-		start++;
-	}
-	return 1;
-}
-
-void cd(char * args[])
-{
-	//if user has specified a path, cd to there.
-	//Otherwise, cd to HOME
-	if(args[1])
-	{
-		if(chdir(args[1]) == -1)
-			printf("Error: Could not change directory");
-	}
-	else
-	{
-		char home[100];
-		getcwd(home, 100);
-		if(chdir(home) == -1)
-			printf("Error: Could not change directory");
-	}
-}
-
 void searchPath(char * source, char * destination)
 {
 	char * path = getenv("PATH");
-	char * check = strtok(path, ";");
+	char * check = strtok(path, ":");
 	while(check)
 	{
 		strcpy(destination, check);
@@ -47,7 +16,7 @@ void searchPath(char * source, char * destination)
 		strcat(destination, source);
 		if(access(destination, F_OK) != -1)
 			return;
-		check = strtok(NULL, ";");
+		check = strtok(NULL, ":");
 	}		
 }
 
@@ -91,7 +60,7 @@ void runCommandsHelper(char* commands[], char * env[])
 	//base case. just run head
 	if(tail[0] == NULL)
 	{
-		printf("%s %s", head[0], head[1]);
+		char 
 		execve(head[0], head, env);
 	}
 	else
@@ -111,6 +80,8 @@ void runCommandsHelper(char* commands[], char * env[])
 			close(1);
 			dup(pd[1]);
 			close(pd[1]);
+			char fullpath[100];
+			searchPath(head[0], fullpath);
 			execve(head[0], head, env);
 		}
 		else
@@ -126,14 +97,16 @@ void runCommandsHelper(char* commands[], char * env[])
 
 void runCommands(char *commands[], char * env[])
 {
-	//handlers for cd and exit
-	if(startsWith(commands[0], "cd"))
+	//handlers here for cd and exit
+	char copy[100];
+	strcpy(copy, commands[0]);
+	char * tok = strtok(copy, " ");
+	if(strcmp(tok, "cd") == 0)
 	{
-		char * path = strtok(commands[0], " ");
-		path = strtok(NULL, " ");
-		chdir(path);
+		tok = strtok(tok, " <>");
+		chdir(tok);
 	}
-	else if(startsWith(commands[0], "exit"))
+	else if(strcmp(tok, "exit") == 0)
 	{
 		exit(1);
 	}
