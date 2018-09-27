@@ -35,21 +35,22 @@ void runCommandsHelper(char* commands[], char * env[])
 					head_base[i] = head_base[i + 1] = '\0';
 					char * filename = strtok(head_base + i + 2, " ");
 					close(1);
-					open(filename, O_WRONLY|O_CREAT, 0644);
+					open(filename, O_APPEND);
 				}
 				else
 				{
 					head_base[i] = '\0';
 					char * filename = strtok(head_base + i + 1, " ");
 					close(1);
-					open(filename, O_APPEND);
+					open(filename, O_WRONLY|O_CREAT, 0644);
+						
 				}
 			}
 			else if(head_base[i] == '<')
 			{
-				close(0);
 				head_base[i] = '\0';
 				char * filename = strtok(head_base + i + 1, " ");
+				close(0);
 				open(filename, O_RDONLY);
 			}
 	}
@@ -60,8 +61,9 @@ void runCommandsHelper(char* commands[], char * env[])
 	//base case. just run head
 	if(tail[0] == NULL)
 	{
-		char 
-		execve(head[0], head, env);
+		char fullpath[100];
+		searchPath(head[0], fullpath); 
+		execve(fullpath, head, env);
 	}
 	else
 	{
@@ -82,7 +84,7 @@ void runCommandsHelper(char* commands[], char * env[])
 			close(pd[1]);
 			char fullpath[100];
 			searchPath(head[0], fullpath);
-			execve(head[0], head, env);
+			execve(fullpath, head, env);
 		}
 		else
 		{
@@ -103,7 +105,7 @@ void runCommands(char *commands[], char * env[])
 	char * tok = strtok(copy, " ");
 	if(strcmp(tok, "cd") == 0)
 	{
-		tok = strtok(tok, " <>");
+		tok = strtok(NULL, " <>");
 		chdir(tok);
 	}
 	else if(strcmp(tok, "exit") == 0)
@@ -126,6 +128,7 @@ void runCommands(char *commands[], char * env[])
 		else
 		{
 			runCommandsHelper(commands, env);
+			printf("End run commands helper");
 		}
 	}
 }
@@ -134,6 +137,7 @@ int main(int argc, char * argv[], char * env[])
 {
 	char input[1000];
 	char *piped_commands[50] = {NULL};
+	system("clear");
 	printf("Welcome to RyanOS!\n\n");
 	while(1)
 	{
