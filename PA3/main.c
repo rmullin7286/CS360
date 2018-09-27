@@ -5,6 +5,9 @@
 #include <fcntl.h>
 #include <sys/wait.h>
 
+int stdin_copy = dup(0);
+int stdout_copy = dup(1);
+
 void searchPath(char * source, char * destination)
 {
 	char * path = getenv("PATH");
@@ -18,6 +21,23 @@ void searchPath(char * source, char * destination)
 			return;
 		check = strtok(NULL, ":");
 	}		
+}
+
+void executeCommand(char * args[], char * env[])
+{
+	int pid = fork();
+	if(pid)
+	{
+		int status;
+		pid = wait(&status);
+		fprintf(stderr, "Exit status of %s: %d", args[0], WEXITSTATUS(status));
+	}
+	else
+	{
+		char fullpath[100];
+		searchPath(args[0], fullpath);
+		execve(fullpath, args, env);
+	}
 }
 
 void runCommandsHelper(char* commands[], char * env[])
@@ -61,9 +81,7 @@ void runCommandsHelper(char* commands[], char * env[])
 	//base case. just run head
 	if(tail[0] == NULL)
 	{
-		char fullpath[100];
-		searchPath(head[0], fullpath); 
-		execve(fullpath, head, env);
+		executeProcess(head, env);
 	}
 	else
 	{
@@ -82,9 +100,7 @@ void runCommandsHelper(char* commands[], char * env[])
 			close(1);
 			dup(pd[1]);
 			close(pd[1]);
-			char fullpath[100];
-			searchPath(head[0], fullpath);
-			execve(fullpath, head, env);
+			executeProcess(head, env);
 		}
 		else
 		{
