@@ -106,6 +106,8 @@ void runCommands(char *commands[], char * env[])
 	if(strcmp(tok, "cd") == 0)
 	{
 		tok = strtok(NULL, " <>");
+		if(!tok || strcmp(tok, "") == 0)
+			tok = getenv("HOME");
 		chdir(tok);
 	}
 	else if(strcmp(tok, "exit") == 0)
