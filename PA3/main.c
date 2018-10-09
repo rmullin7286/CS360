@@ -53,7 +53,7 @@ void runCommandsHelper(char* commands[], char * env[])
 					head_base[i] = head_base[i + 1] = '\0';
 					char * filename = strtok(head_base + i + 2, " ");
 					close(1);
-					open(filename, O_APPEND);
+					open(filename, O_WRONLY|O_APPEND);
 				}
 				else
 				{
