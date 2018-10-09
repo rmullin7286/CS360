@@ -27,7 +27,7 @@ void executeProcess(char * args[], char * env[])
 	if(pid)
 	{
 		int status;
-		wait(&status);
+		waitpid(pid, &status, 0);
 		fprintf(stderr, "Exit status of %s: %d\n", args[0], WEXITSTATUS(status));
 	}
 	else
@@ -94,18 +94,20 @@ void runCommandsHelper(char* commands[], char * env[])
 		}
 		else if(pid)
 		{
-			close(pd[0]);
-			close(1);
+			close(STDOUT_FILENO);
 			dup(pd[1]);
+			close(pd[0]);
 			close(pd[1]);
 			executeProcess(head, env);
+			close(STDOUT_FILENO);
+			waitpid(pid, NULL, 0);
 			exit(1);
 		}
 		else
 		{
-			close(pd[1]);
-			close(0);
+			close(STDIN_FILENO);
 			dup(pd[0]);
+			close(pd[1]);
 			close(pd[0]);
 			runCommandsHelper(tail, env);
 		}
@@ -141,7 +143,6 @@ void runCommands(char *commands[], char * env[])
 		{
 			int status;
 			pid = wait(&status);
-			usleep(1000);
 		}
 		else
 		{
