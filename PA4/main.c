@@ -55,6 +55,7 @@ int myrcp(char *f1, char *f2)
 			strcpy(buffer, f2);
 			strcat(buffer, "/");
 			strcat(buffer, base);
+			mkdir(buffer, s1.st_mode);
 			return cpd2d(f1, buffer);
 		}
 	}
