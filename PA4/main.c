@@ -65,7 +65,12 @@ int myrcp(char *f1, char *f2)
 				printf("Cannot copy to a subdirectory of source.\n");
 				return 1;
 			}
-			return cpd2d(f1, f2);
+
+			char * base = basename(f1);
+			char buffer[4096];
+			strcat(strcat(strcpy(buffer, f2), "/"), base);
+			mkdir(buffer, s1.st_mode);
+			return cpd2d(f1, buffer);
 		}
 	}
 }
