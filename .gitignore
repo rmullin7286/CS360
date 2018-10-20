@@ -55,5 +55,10 @@ dkms.conf
 PA1
 PA2
 
+bmap
+imap
+gd
+super
+
 #misc files
 PA2/save.txt
