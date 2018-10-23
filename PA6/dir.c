@@ -17,6 +17,26 @@ int get_block(int fd, int blk, char buf[ ])
    read(fd, buf, BLKSIZE);
 }
 
+unsigned int search(INODE* ip, char * to_find, int fd)
+{
+    char buf[1024];
+    unsigned int block0 = ip->i_block[0];
+    get_block(fd, block0, buf);
+    char* cp = buf;
+    DIR* dp = (DIR*)buf;
+    while(cp - buf < 1024)
+    {
+        char name[EXT2_NAME_LEN];
+        strncpy(name, dp->name, dp->name_len);
+        name[dp->name_len] = '\0';
+        if(strcmp(name, to_find) == 0)
+            return dp->inode;
+        cp += dp->rec_len;
+        dp = (DIR*)cp;
+    }
+    return 0;
+}
+
 int main(int argc, char *argv[])
 {
     if(argc < 2)
@@ -31,14 +51,14 @@ int main(int argc, char *argv[])
     GD* gp = (GD*)buf;
     get_block(fd, gp->bg_inode_table, buf);
     INODE* ip = (INODE*) buf + 1;
-    unsigned int block0 = ip->i_block[0];
-    get_block(fd, block0, buf);
-    char* cp = buf;
-    DIR* dp = (DIR*)buf;
     
     if(argc == 2)
     {
         //print all entries under / directory
+        unsigned int block0 = ip->i_block[0];
+        get_block(fd, block0, buf);
+        char* cp = buf;
+        DIR* dp = (DIR*)buf;
         while(cp - buf < 1024)
         {
             char name[EXT2_NAME_LEN];
@@ -50,4 +70,15 @@ int main(int argc, char *argv[])
         }
         return 0;
     }
+    
+    else if(argc == 3)
+    {
+        //as an example, search / for lost+found
+        int ret = search(ip, argv[2], fd);
+        if(ret == 0)
+            printf("%s not found\n", argv[2]);
+        else
+            printf("inode number = %d\n", ret);
+    }
+    return 0;
 }
