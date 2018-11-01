@@ -63,6 +63,7 @@ bmap
 imap
 gd
 super
+showblock
 
 #misc files
 PA2/save.txt
