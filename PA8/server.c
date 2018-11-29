@@ -3,11 +3,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <libgen.h>
 
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <sys/stat.h>
 
 #define  MAX 256
 
@@ -18,6 +20,46 @@ struct hostent *hp;
 int  mysock, client_sock;              // socket descriptors
 int  serverPort;                     // server port number
 int  r, length, n;                   // help variables
+
+char pathname[246], command[10];
+
+void ls_file(char * out, char * pathname)
+{
+  const char * t1 = "xwrxwrxwr-------";
+  const char * t2 = "----------------";
+  struct stat fstat;
+  char ftime[64];
+  if((r = lstat(pathname, &fstat)) < 0)
+  {
+    strcpy(out, "ls failed");
+  }
+  else
+  {
+    if(S_ISREG(fstat.st_mode))
+      out[0] = '-';
+    else if(S_ISDIR(fstat.st_mode))
+      out[0] = 'd';
+    else if(S_ISLNK(fstat.st_mode))
+      out[0] = 'l';
+    for(int i = 8; i >= 0; i--)
+      if((fstat.st_mode) & 1 << i)
+        out[i + 1] = t1[i];
+      else
+        out[9 - i] = t2[i];
+  }
+
+  char buffer[200];
+  sprintf(buffer, " %4d %4d %4d %4d %8d %s %s", fstat.st_nlink, fstat.st_gid, fstat.st_uid, fstat.st_size,
+      ctime(&(fstat.st_atime)), basename(pathname));
+  strcat(out, buffer);
+  if(S_ISLNK(fstat.st_mode))
+  {
+    char buffer2[100];
+    readlink(pathname, buffer2, 200);
+    sprintf(buffer, " -> %s", buffer2);
+    strcat(out, buffer);
+  }
+}
 
 // Server initialization code:
 
@@ -118,13 +160,41 @@ int main(int argc, char *argv[])
       // show the line string
       printf("server: read  n=%d bytes; line=[%s]\n", n, line);
 
-      strcat(line, " ECHO");
+      sscanf(line, "%s %s", command, pathname);
+      printf("%s", command);
+      printf("%s", pathname);
 
+      int skip = 0;
+
+      if(strcmp(command, "mkdir") == 0)
+        strcpy(line, (mkdir(pathname, 0755) == 0 ? "mkdir success" : "mkdir failure"));
+      else if(strcmp(command, "rmdir") == 0)
+        strcpy(line, (rmdir(pathname) == 0 ? "rmdir success" : "rmdir failure"));
+      else if(strcmp(command, "rm") == 0)
+        strcpy(line, (unlink(pathname) == 0 ? "rm success" : "rm failure"));
+      else if(strcmp(command, "cd") == 0)
+        strcpy(line, (chdir(pathname) == 0 ? "cd success" : "cd failure"));
+      else if(strcmp(command, "pwd") == 0)
+        getcwd(line, MAX);
+
+      else if(strcmp(command, "ls") == 0)
+      {
+        //skip the final write out
+        skip = 1;
+
+        
+      }    
+        
       // send the echo line to client 
-      n = write(client_sock, line, MAX);
+      if(!skip)
+      {
+        n = write(client_sock, line, MAX);
 
-      printf("server: wrote n=%d bytes; ECHO=[%s]\n", n, line);
-      printf("server: ready for next request\n");
+        printf("server: wrote n=%d bytes; ECHO=[%s]\n", n, line);
+        printf("server: ready for next request\n");
+      }
+      else
+        skip = 0;
     }
  }
 }
