@@ -4,12 +4,15 @@
 #include <string.h>
 #include <unistd.h>
 #include <libgen.h>
+#include <time.h>
 
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <sys/stat.h>
+
+#include "filetransfer.h"
 
 #define  MAX 256
 
@@ -22,6 +25,11 @@ int  serverPort;                     // server port number
 int  r, length, n;                   // help variables
 
 char pathname[246], command[10];
+
+int send_file(int socket, char * pathname)
+{
+
+}
 
 void ls_file(char * out, char * pathname)
 {
@@ -49,7 +57,7 @@ void ls_file(char * out, char * pathname)
   }
 
   char buffer[200];
-  sprintf(buffer, " %4d %4d %4d %4d %8d %s %s", fstat.st_nlink, fstat.st_gid, fstat.st_uid, fstat.st_size,
+  sprintf(buffer, " %4lu %4u %4u %4ld %s %s", fstat.st_nlink, fstat.st_gid, fstat.st_uid, fstat.st_size,
       ctime(&(fstat.st_atime)), basename(pathname));
   strcat(out, buffer);
   if(S_ISLNK(fstat.st_mode))
@@ -182,8 +190,32 @@ int main(int argc, char *argv[])
         //skip the final write out
         skip = 1;
 
-        
+        //TODO: implement rest of ls code here
       }    
+
+      else if(strcmp(command, "get") == 0)
+      {
+        skip = 1;
+        int i = sendfile(client_sock, pathname);
+        if(i == -1)
+        {
+          printf("failed to send file\n");
+        }
+        else
+        {
+          printf("%d bytes sent\n", i);
+        }
+      }
+
+      else if(strcmp(command, "put") == 0)
+      {
+        skip = 1;
+        int i = receivefile(client_sock, pathname);
+        if( i == -1)
+          printf("failed to receive file\n");
+        else
+          printf("%d bytes read\n", i);
+      }
         
       // send the echo line to client 
       if(!skip)

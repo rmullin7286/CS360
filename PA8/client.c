@@ -9,6 +9,8 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 
+#include "filetransfer.h"
+
 #define MAX 256
 
 // Define variables
@@ -17,7 +19,9 @@ struct sockaddr_in  server_addr;
 
 int server_sock, r;
 struct in_addr SERVER_IP;
-int SERVER_PORT; 
+int SERVER_PORT;
+
+
 
 
 // clinet initialization code
@@ -85,14 +89,47 @@ int main(int argc, char *argv[ ])
 
     line[strlen(line)-1] = 0;        // kill \n at end
     if (line[0]==0)                  // exit if NULL line
-       exit(0);
+      exit(0);
 
     // Send ENTIRE line to server
     n = write(server_sock, line, MAX);
     printf("client: wrote n=%d bytes; line=(%s)\n", n, line);
 
     // Read a line from sock and show it
-    n = read(server_sock, ans, MAX);
-    printf("client: read  n=%d bytes; echo=(%s)\n",n, ans);
+    if(strncmp(line, "get", 3) == 0)
+    {
+      char cmd[10], path[246];
+      sscanf(line, "%s %s", cmd, path);
+      int i = receivefile(server_sock, path);
+      if(i == 0)
+      {
+        printf("receive file failed\n");
+      }
+      else
+      {
+        printf("%d bytes received\n", i);
+      }
+    }
+
+    else if(strncmp(line, "put", 3) == 0)
+    {
+      char cmd[10], path[246];
+      sscanf(line, "%s %s", cmd, path);
+      int i = sendfile(server_sock, path);
+      if(i == 0)
+      {
+        printf("send file failed\n");
+      }
+      else
+      {
+        printf("sent %d bytes", i);
+      }
+    }
+
+    else
+    {
+      n = read(server_sock, ans, MAX);
+      printf("client: read  n=%d bytes; echo=(%s)\n",n, ans);
+    }
   }
 }

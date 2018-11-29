@@ -1,5 +1,5 @@
 .PHONY: all
 all: client server
 
-% : %.c
-	gcc -o $@ $<
+% : %.c filetransfer.c filetransfer.h
+	gcc -g -o $@ $< filetransfer.c
