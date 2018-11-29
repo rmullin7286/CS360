@@ -54,7 +54,8 @@ dkms.conf
 #compiled binaries
 PA1
 PA2
-
+PA3
+PA4
 dir
 balloc
 ialloc
@@ -65,6 +66,8 @@ gd
 super
 showblock
 PA7
+client
+server
 
 #misc files
 PA2/save.txt

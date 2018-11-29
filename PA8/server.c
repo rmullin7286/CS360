@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
            printf("server: client died, server loops\n");
            close(client_sock);
            break;
-      }
+        }
       
       // show the line string
       printf("server: read  n=%d bytes; line=[%s]\n", n, line);

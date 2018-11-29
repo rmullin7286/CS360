@@ -96,5 +96,3 @@ int main(int argc, char *argv[ ])
     printf("client: read  n=%d bytes; echo=(%s)\n",n, ans);
   }
 }
-
-
