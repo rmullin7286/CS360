@@ -126,6 +126,18 @@ int main(int argc, char *argv[ ])
       }
     }
 
+    else if(strncmp(line, "ls", 2) == 0)
+    {
+        strcpy(ans, "");
+        while(strcmp(ans, "END"))
+        {
+            n = read(server_sock, ans, MAX);
+            if(strcmp(ans, "END") == 0)
+                break;
+            puts(ans);
+        }
+    }
+
     else
     {
       n = read(server_sock, ans, MAX);

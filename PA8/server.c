@@ -5,7 +5,9 @@
 #include <unistd.h>
 #include <libgen.h>
 #include <time.h>
+#include <dirent.h>
 
+#include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -25,11 +27,6 @@ int  serverPort;                     // server port number
 int  r, length, n;                   // help variables
 
 char pathname[246], command[10];
-
-int send_file(int socket, char * pathname)
-{
-
-}
 
 void ls_file(char * out, char * pathname)
 {
@@ -51,14 +48,17 @@ void ls_file(char * out, char * pathname)
       out[0] = 'l';
     for(int i = 8; i >= 0; i--)
       if((fstat.st_mode) & 1 << i)
-        out[i + 1] = t1[i];
+        out[9 - i] = t1[i];
       else
         out[9 - i] = t2[i];
   }
+  out[10] = '\0';
 
   char buffer[200];
+  char *time_out = ctime(&(fstat.st_atime));
+  time_out[strlen(time_out)-1] = 0;
   sprintf(buffer, " %4lu %4u %4u %4ld %s %s", fstat.st_nlink, fstat.st_gid, fstat.st_uid, fstat.st_size,
-      ctime(&(fstat.st_atime)), basename(pathname));
+      time_out, basename(pathname));
   strcat(out, buffer);
   if(S_ISLNK(fstat.st_mode))
   {
@@ -67,6 +67,32 @@ void ls_file(char * out, char * pathname)
     sprintf(buffer, " -> %s", buffer2);
     strcat(out, buffer);
   }
+}
+
+void ls_dir(char *dirname)
+{
+    char line[MAX], targetDir[MAX];
+    struct dirent *pDirent;
+    DIR *pDir;
+
+    pDir = opendir(dirname);
+    if(pDir == NULL)
+    {
+        strcpy(line, "Cannot open directory ");
+        strcat(line, dirname);
+        write(client_sock, line, MAX);
+        return;
+    }
+    
+    while((pDirent = readdir(pDir)))
+    {
+        strcpy(targetDir,dirname);
+        strcat(targetDir, "/");
+        strcat(targetDir, pDirent->d_name);
+        ls_file(line, targetDir);
+        write(client_sock, line, MAX);
+    }
+    write(client_sock, "END", MAX);
 }
 
 // Server initialization code:
@@ -129,8 +155,11 @@ int server_init(char *name)
 
 int main(int argc, char *argv[])
 {
+   char root[MAX];
+   getcwd(root, MAX);
    char *hostname;
    char line[MAX];
+   line[0] = 0;
 
    if (argc < 2)
       hostname = "localhost";
@@ -167,7 +196,8 @@ int main(int argc, char *argv[])
       
       // show the line string
       printf("server: read  n=%d bytes; line=[%s]\n", n, line);
-
+      command[0] = 0;
+      pathname[0] = 0;
       sscanf(line, "%s %s", command, pathname);
       printf("%s", command);
       printf("%s", pathname);
@@ -181,7 +211,17 @@ int main(int argc, char *argv[])
       else if(strcmp(command, "rm") == 0)
         strcpy(line, (unlink(pathname) == 0 ? "rm success" : "rm failure"));
       else if(strcmp(command, "cd") == 0)
-        strcpy(line, (chdir(pathname) == 0 ? "cd success" : "cd failure"));
+      {
+          //strcpy(line, (chdir(pathname) == 0 ? "cd success" : "cd failure"));
+          if(strlen(pathname) == 0)
+          {
+            strcpy(line, (chdir(root) == 0 ? "cd success" : "cd failure"));
+          }
+          else 
+          {
+            strcpy(line, (chdir(pathname) == 0 ? "cd success" : "cd failure"));
+          }
+      }
       else if(strcmp(command, "pwd") == 0)
         getcwd(line, MAX);
 
@@ -189,8 +229,28 @@ int main(int argc, char *argv[])
       {
         //skip the final write out
         skip = 1;
-
         //TODO: implement rest of ls code here
+        if(strlen(pathname) == 0)
+        {
+            getcwd(pathname, 246);
+        }
+        puts(pathname);
+        struct stat fstat;
+        if(r = lstat(pathname, &fstat)< 0)
+        {
+            write(client_sock,"ls failed", MAX);
+        }
+        else if(S_ISDIR(fstat.st_mode))
+        {
+            ls_dir(pathname);
+        }
+        else
+        {
+            ls_file(line, pathname);
+            write(client_sock, line, MAX);
+            write(client_sock, "END", MAX);
+        }
+
       }    
 
       else if(strcmp(command, "get") == 0)
@@ -230,4 +290,3 @@ int main(int argc, char *argv[])
     }
  }
 }
-
